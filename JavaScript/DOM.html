@@ -27,6 +27,8 @@
 	<button onclick="pAddSmall()">AddSmall</button>
 	<button onclick="pRemoveSmall()">RemoveSmall</button>
 	<button onclick="pToggleSmall()">ToggleSmall</button>
+	<button onclick="changeImg()">ChangeImg</button>
+	<button onclick="changeLink()">ChangeLink</button>
 
 	<h1>Welcome To My DOM Demo</h1>
 	<p id="first" class="special">Hello</p>
@@ -34,6 +36,7 @@
 	<p>Hi Again</p>
 	<p id="last">Goodbye Again</p>
 	<p>Corgi mixes are <strong>super</strong> adorable</p>
+	<a href="http://google.com" target="_blank">I'm a link to Google</a>
 
 	<ul>
 		<li>Orchids</li>
@@ -81,6 +84,31 @@
 		var pDogs = document.querySelector('p#last + p');
 		pDogs.textContent 	// returns only text inside the element(treats string purely as text)
 		pDogs.innerHTML		// returns everything including the html inside the element (treats string purely as html and text)
+
+		// Ways to manipulate the attributes of the elements
+		var img1 = document.getElementsByTagName('img')[0];
+		function changeImg() {
+			var src = img1.getAttribute('src');
+			if(src === "https://barrelhorseworld.com/dogs/images/1145556d.jpg"){
+				img1.setAttribute('src', 'https://i0.wp.com/corgiguide.com/wp-content/uploads/2014/07/corgi_husky_mix_hybrid_breed.jpg');
+			}
+			else {
+				img1.setAttribute('src', 'https://barrelhorseworld.com/dogs/images/1145556d.jpg');
+			}
+		}
+
+		var link = document.querySelector('a');
+		function changeLink() {
+			var href = link.getAttribute('href');
+			if(href === "http://google.com"){
+				link.setAttribute('href', 'https://en.wikipedia.org/wiki/Welsh_Corgi');
+				link.textContent = 'I\'m a link to Corgis';
+			}
+			else {
+				link.setAttribute('href', 'http://google.com');
+				link.textContent = 'I\'m a link to Google';
+			}
+		}
 
 	</script>
 </body>
