@@ -4,8 +4,21 @@ var colorDisplay = document.querySelector("#colorDisplay");
 var pickedColor = pickColor();
 var msg = document.querySelector('#msg');
 var h1 = document.querySelector("h1");
+var reset = document.querySelector("#reset");
 
 colorDisplay.textContent = pickedColor;
+
+reset.addEventListener("click", function() {
+	colors = pushColors(6);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	h1.style.backgroundColor = "";
+	msg.textContent = "";
+	reset.textContent = "NEW COLORS"
+	for(i=0; i<squares.length; i++) {
+		squares[i].style.backgroundColor = colors[i];
+	}
+})
 
 for(i=0; i<squares.length; i++) {
 	squares[i].style.backgroundColor = colors[i];
@@ -16,6 +29,7 @@ for(i=0; i<squares.length; i++) {
 			msg.textContent = "Correct!";
 			changeColor(pickedColor);
 			h1.style.backgroundColor = clickedColor;
+			reset.textContent = "PLAY AGAIN"
 		}
 		else {
 			this.style.backgroundColor = "#232323";
@@ -24,6 +38,8 @@ for(i=0; i<squares.length; i++) {
 	})
 }
 
+
+// Functions
 function changeColor(color) {
 	for(i=0; i<squares.length; i++) {
 		squares[i].style.backgroundColor = color;

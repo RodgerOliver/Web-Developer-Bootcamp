@@ -6,14 +6,17 @@ h1 {
 	color: white;
 }
 
-span {
-	color: white;
-}
-
 .container {
 	overflow: hidden;
 	max-width: 500px;
 	margin: 0 auto;
+}
+
+#stripe {
+	background-color: white;
+	height: 30px;
+	text-align: center;
+	color: black;
 }
 
 .square {
