@@ -6,6 +6,10 @@ h1 {
 	color: white;
 }
 
+span {
+	color: white;
+}
+
 .container {
 	overflow: hidden;
 	max-width: 500px;
