@@ -29,14 +29,14 @@ function setupModeBtns() {
 			if(this.textContent === "Easy") {
 				numSquares = 3;
 			}
-			else if(this.textContent === "Hard") {
+			else if(this.textContent === "Medium") {
 				numSquares = 6;
 			}
-			else if(this.textContent === "Super Hard") {
+			else if(this.textContent === "Hard") {
 				numSquares = 9;
 			}
 			else {
-				numSquares = 12;
+				numSquares = 15;
 			}
 			reset();
 		})
@@ -83,20 +83,16 @@ function reset() {
 	// change color of the squares
 	for(i=0; i<squares.length; i++) {
 		if(colors[i]){
-			if (colors.length === 12) {
-				container.style.maxWidth = "750px";
-				squares[i].style.width = "20%";
-				squares[i].style.paddingBottom = "20%";
-				squares[i].style.display = "";
-				squares[i].style.backgroundColor = colors[i];
+			if (colors.length === 15) {
+				container.style.maxWidth = "833.4px";
+				squares[i].classList.add("squaresExtreme");
 			}
 			else {
 				container.style.maxWidth = "500px";
-				squares[i].style.display = "";
-				squares[i].style.backgroundColor = colors[i];
-				squares[i].style.width = "30%";
-				squares[i].style.paddingBottom = "30%";
+				squares[i].classList.remove("squaresExtreme");
 			}
+			squares[i].style.display = "";
+			squares[i].style.backgroundColor = colors[i];
 		}
 		else {
 			squares[i].style.display = "none";

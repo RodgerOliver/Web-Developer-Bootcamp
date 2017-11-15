@@ -69,6 +69,18 @@ button:hover {
 	-moz-transition: background .3s;
 }
 
+.squaresExtreme {
+	width: 18%;
+	background-color: purple;
+	padding-bottom: 18%;
+	float: left;
+	margin: 0.996%;
+	border-radius: 15%;
+	transition: background .3s;
+	-webkit-transition: background .3s;
+	-moz-transition: background .3s;
+}
+
 .selected {
 	background-color: steelblue;
 	color: white;
