@@ -7,6 +7,7 @@ var msg = document.querySelector('#msg');
 var h1 = document.querySelector("h1");
 var resetBtn = document.querySelector("#resetBtn");
 var modeBtns = document.querySelectorAll(".mode");
+var container = document.querySelector(".container");
 
 init();
 
@@ -21,8 +22,22 @@ function setupModeBtns() {
 		modeBtns[i].addEventListener("click", function() {
 			modeBtns[0].classList.remove("selected");
 			modeBtns[1].classList.remove("selected");
+			modeBtns[2].classList.remove("selected");
+			modeBtns[3].classList.remove("selected");
 			this.classList.add("selected");
-			this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+			//this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+			if(this.textContent === "Easy") {
+				numSquares = 3;
+			}
+			else if(this.textContent === "Hard") {
+				numSquares = 6;
+			}
+			else if(this.textContent === "Super Hard") {
+				numSquares = 9;
+			}
+			else {
+				numSquares = 12;
+			}
 			reset();
 		})
 	}
@@ -39,7 +54,7 @@ function setupSquares() {
 				msg.textContent = "Correct!";
 				changeColor(pickedColor);
 				h1.style.backgroundColor = clickedColor;
-				resetBtn.textContent = "Play Again"
+				resetBtn.textContent = "Play Again?"
 			}
 			else {
 				this.style.backgroundColor = "#232323";
@@ -68,8 +83,20 @@ function reset() {
 	// change color of the squares
 	for(i=0; i<squares.length; i++) {
 		if(colors[i]){
-			squares[i].style.display = "";
-			squares[i].style.backgroundColor = colors[i];
+			if (colors.length === 12) {
+				container.style.maxWidth = "750px";
+				squares[i].style.width = "20%";
+				squares[i].style.paddingBottom = "20%";
+				squares[i].style.display = "";
+				squares[i].style.backgroundColor = colors[i];
+			}
+			else {
+				container.style.maxWidth = "500px";
+				squares[i].style.display = "";
+				squares[i].style.backgroundColor = colors[i];
+				squares[i].style.width = "30%";
+				squares[i].style.paddingBottom = "30%";
+			}
 		}
 		else {
 			squares[i].style.display = "none";
