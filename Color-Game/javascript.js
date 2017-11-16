@@ -78,7 +78,7 @@ function reset() {
 	// change colorDisplay to match pickedColor
 	colorDisplay.textContent = pickedColor;
 	h1.style.backgroundColor = "";
-	msg.textContent = "";
+	msg.textContent = "Pick a Color";
 	resetBtn.textContent = "New Colors";
 	// change color of the squares
 	for(i=0; i<squares.length; i++) {

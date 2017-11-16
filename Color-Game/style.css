@@ -15,9 +15,9 @@ h1 {
 	line-height: 1.1;
 	padding: 20px 0;
 	font-weight: 400;
-	transition: background .3s;
-	-webkit-transition: background .3s;
-	-moz-transition: background .3s;
+	transition: background .4s;
+	-webkit-transition: background .4s;
+	-moz-transition: background .4s;
 }
 
 button {
@@ -29,9 +29,9 @@ button {
 	color: steelblue;
 	letter-spacing: 1px;
 	font-size: inherit;
-	transition: all .3s;
-	-webkit-transition: all .3s;
-	-moz-transition: all .3s;
+	transition: all .4s;
+	-webkit-transition: all .4s;
+	-moz-transition: all .4s;
 	outline: none;
 }
 
@@ -64,9 +64,9 @@ button:hover {
 	float: left;
 	margin: 1.66%;
 	border-radius: 15%;
-	transition: background .3s;
-	-webkit-transition: background .3s;
-	-moz-transition: background .3s;
+	transition: background .4s;
+	-webkit-transition: background .4s;
+	-moz-transition: background .4s;
 }
 
 .squaresExtreme {
@@ -76,9 +76,13 @@ button:hover {
 	float: left;
 	margin: 0.996%;
 	border-radius: 15%;
-	transition: background .3s;
-	-webkit-transition: background .3s;
-	-moz-transition: background .3s;
+	transition: background .4s;
+	-webkit-transition: background .4s;
+	-moz-transition: background .4s;
+}
+
+#modes {
+	display: inline;
 }
 
 .selected {
@@ -89,4 +93,36 @@ button:hover {
 #msg {
 	display: inline-block;
 	width: 20%;
+}
+
+@media (max-width: 600px) {
+
+	#resetBtn {
+		height: 45%;
+	}
+
+	#stripe {
+		height: 90px;
+	}
+
+	#modes {
+		display: block;
+		margin-top: 10px;
+		height: 45%;
+	}
+
+	#msg {
+		width: 40%;
+	}
+
+	h1 {
+		font-size: 1.5em;
+	}
+}
+
+@media (max-width: 460px) {
+
+	h1 {
+		font-size: 1.1em;
+	}
 }
