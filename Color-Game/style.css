@@ -125,4 +125,8 @@ button:hover {
 	h1 {
 		font-size: 1.1em;
 	}
+
+	#stripe {
+		font-size: 14px;
+	}
 }
