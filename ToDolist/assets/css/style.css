@@ -1,0 +1,19 @@
+body {
+
+}
+
+#container {
+	border: 2px solid grey;
+	width: 360px;
+	margin: 0 auto;
+}
+
+.done {
+	text-decoration: line-through;
+	color: gray;
+}
+
+input {
+	width: 100%;
+
+}
