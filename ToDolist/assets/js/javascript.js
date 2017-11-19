@@ -1,16 +1,22 @@
 // Chech offspecific todo by clicking
-$("li").click(function() {
+// Create a listener for an element that exists when the page loads
+// When an "li" is clicked inside of "ul" run the code bellow
+$("ul").on("click", "li", function() {
 	$(this).toggleClass("done");
 })
 
 // Click on X to delete todo
-$("span").click(function (event) {
+$("ul").on("click", "li span", function (event) {
 	$(this).parent().fadeOut(500, function(){
 		$(this).remove();
 	});
 	event.stopPropagation();
 })
 
-$("input").submit(function() {
-	$("<li><span>X</span></li>").text = $("input").val();
+$("input[type='text']").keypress(function(event) {
+	if(event.which === 13) {
+		var newTodo = $("<li><span>X </span>"+ $(this).val() +"</li>")
+		$("ul").append(newTodo);
+		$(this).val("");
+	}
 })
