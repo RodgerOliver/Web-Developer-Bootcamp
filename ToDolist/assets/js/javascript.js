@@ -15,7 +15,7 @@ $("ul").on("click", "li span", function (event) {
 
 $("input[type='text']").keypress(function(event) {
 	if(event.which === 13) {
-		var newTodo = $("<li><span>X </span>"+ $(this).val() +"</li>")
+		var newTodo = $("<li><span><i class='fa fa-trash-o' aria-hidden='true'></i></span> "+ $(this).val() +"</li>")
 		$("ul").append(newTodo);
 		$(this).val("");
 	}
