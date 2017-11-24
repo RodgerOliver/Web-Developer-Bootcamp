@@ -82,3 +82,37 @@ function reset() {
 	$("#resultado").text("Resultado: ");
 	$("#resultado").css("font-weight", "normal");
 }
+
+function trying2() {
+
+	var array = [];
+	for(i=0; i<$("table#t2 input").length; i++){
+		array.push($("table#t2 input").eq(i).val());
+	}
+	console.log(array);
+	var array2 = array.splice(2);
+	console.log(array);
+	console.log(array2);
+	var bigArray = [array,array2];
+	console.log(bigArray);
+	var result = (bigArray[0][0]*bigArray[1][1])-(bigArray[0][1]*bigArray[1][0]);
+	console.log(result);
+}
+
+function trying3() {
+
+	var array = [];
+	for(i=0; i<$("table#t3 input").length; i++){
+		array.push($("table#t3 input").eq(i).val());
+	}
+	console.log(array);
+	var array2 = array.splice(3);
+	var array3 = array2.splice(3);
+	console.log(array);
+	console.log(array2);
+	console.log(array3);
+	var bigArray = [array,array2,array3];
+	console.log(bigArray);
+	var result = bigArray[0][0]*(bigArray[1][1]*bigArray[2][2] - bigArray[1][2]*bigArray[2][1]) - bigArray[0][1]*(bigArray[1][0]*bigArray[2][2] - bigArray[1][2]*bigArray[2][0]) + bigArray[0][2]*(bigArray[1][0]*bigArray[2][1] - bigArray[1][1]*bigArray[2][0]);
+	console.log(result);
+}
