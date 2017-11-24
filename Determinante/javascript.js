@@ -85,34 +85,25 @@ function reset() {
 
 function trying2() {
 
-	var array = [];
+	var arr = [];
 	for(i=0; i<$("table#t2 input").length; i++){
-		array.push($("table#t2 input").eq(i).val());
+		arr.push(Number($("table#t2 input").eq(i).val()));
 	}
-	console.log(array);
-	var array2 = array.splice(2);
-	console.log(array);
-	console.log(array2);
-	var bigArray = [array,array2];
-	console.log(bigArray);
-	var result = (bigArray[0][0]*bigArray[1][1])-(bigArray[0][1]*bigArray[1][0]);
-	console.log(result);
+
+	var arr2 = arr.splice(2);
+	var bigArr = [arr,arr2];
+	console.log((bigArr[0][0]*bigArr[1][1])-(bigArr[0][1]*bigArr[1][0]));
 }
 
 function trying3() {
 
-	var array = [];
+	var arr = [];
 	for(i=0; i<$("table#t3 input").length; i++){
-		array.push($("table#t3 input").eq(i).val());
+		arr.push(Number($("table#t3 input").eq(i).val()));
 	}
-	console.log(array);
-	var array2 = array.splice(3);
-	var array3 = array2.splice(3);
-	console.log(array);
-	console.log(array2);
-	console.log(array3);
-	var bigArray = [array,array2,array3];
-	console.log(bigArray);
-	var result = bigArray[0][0]*(bigArray[1][1]*bigArray[2][2] - bigArray[1][2]*bigArray[2][1]) - bigArray[0][1]*(bigArray[1][0]*bigArray[2][2] - bigArray[1][2]*bigArray[2][0]) + bigArray[0][2]*(bigArray[1][0]*bigArray[2][1] - bigArray[1][1]*bigArray[2][0]);
-	console.log(result);
+
+	var arr2 = arr.splice(3);
+	var arr3 = arr2.splice(3);
+	var bigArr = [arr,arr2,arr3];
+	console.log(bigArr[0][0]*(bigArr[1][1]*bigArr[2][2] - bigArr[1][2]*bigArr[2][1]) - bigArr[0][1]*(bigArr[1][0]*bigArr[2][2] - bigArr[1][2]*bigArr[2][0]) + bigArr[0][2]*(bigArr[1][0]*bigArr[2][1] - bigArr[1][1]*bigArr[2][0]))
 }
