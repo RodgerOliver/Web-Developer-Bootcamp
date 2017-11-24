@@ -83,27 +83,29 @@ function reset() {
 	$("#resultado").css("font-weight", "normal");
 }
 
-function trying2() {
+function mkArr2() {
 
-	var arr = [];
+	var arr1 = [];
 	for(i=0; i<$("table#t2 input").length; i++){
-		arr.push(Number($("table#t2 input").eq(i).val()));
+		arr1.push(Number($("table#t2 input").eq(i).val()));
 	}
 
-	var arr2 = arr.splice(2);
-	var bigArr = [arr,arr2];
-	console.log((bigArr[0][0]*bigArr[1][1])-(bigArr[0][1]*bigArr[1][0]));
+	var size = Math.sqrt(arr1.length);
+	var arr2 = arr1.splice(size, size);
+	var bigArr = [arr1,arr2];
+	return (bigArr);
 }
 
-function trying3() {
+function mkArr3() {
 
-	var arr = [];
+	var arr1 = [];
 	for(i=0; i<$("table#t3 input").length; i++){
-		arr.push(Number($("table#t3 input").eq(i).val()));
+		arr1.push(Number($("table#t3 input").eq(i).val()));
 	}
 
-	var arr2 = arr.splice(3);
-	var arr3 = arr2.splice(3);
-	var bigArr = [arr,arr2,arr3];
-	console.log(bigArr[0][0]*(bigArr[1][1]*bigArr[2][2] - bigArr[1][2]*bigArr[2][1]) - bigArr[0][1]*(bigArr[1][0]*bigArr[2][2] - bigArr[1][2]*bigArr[2][0]) + bigArr[0][2]*(bigArr[1][0]*bigArr[2][1] - bigArr[1][1]*bigArr[2][0]))
+	var size = Math.sqrt(arr1.length);
+	var arr2 = arr1.splice(size, size);
+	var arr3 = arr1.splice(size, size);
+	var bigArr = [arr1,arr2,arr3];
+	return (bigArr);
 }
