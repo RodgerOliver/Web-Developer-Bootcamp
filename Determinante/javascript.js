@@ -109,3 +109,27 @@ function mkArr3() {
 	var bigArr = [arr1,arr2,arr3];
 	return (bigArr);
 }
+
+function det(arr) {
+
+	if(arr.length === 2) {
+		return (arr[0][0]*arr[1][1] - arr[0][1]*arr[1][0])
+	}
+
+	return (arr[0][0]*det(delRow_Col(arr,0)) - arr[0][1]*det(delRow_Col(arr,1)) + arr[0][2]*det(delRow_Col(arr,2)));
+}
+
+function delRow_Col(arr, index) {
+	var temp = [];
+	// copy the original array
+	for(i=0; i<arr.length; i++) {
+		temp.push(arr[i].slice(0));
+	}
+	// delete the first row
+	temp.splice(0,1);
+	// delete the colomun at the index
+	for(i=0; i<temp.length; i++) {
+		temp[i].splice(index, 1);
+	}
+	return (temp);
+}
