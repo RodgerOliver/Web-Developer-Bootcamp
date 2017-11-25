@@ -80,6 +80,21 @@ function mkArr3() {
 	return (bigArr);
 }
 
+function mkArr4() {
+
+	var arr1 = [];
+	for(i=0; i<$("table#t4 input").length; i++){
+		arr1.push(Number($("table#t4 input").eq(i).val()));
+	}
+
+	var size = Math.sqrt(arr1.length);
+	var arr2 = arr1.splice(size, size);
+	var arr3 = arr1.splice(size, size);
+    var arr4 = arr1.splice(size, size);
+	var bigArr = [arr1,arr2,arr3,arr4];
+	return (bigArr);
+}
+
 function det(arr) {
 
 	if(arr.length === 2) {
