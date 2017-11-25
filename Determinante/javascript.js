@@ -10,6 +10,11 @@ $("#calcBtn").click(function() {
 		var result = det(arr3);
 		$("#resultado").append(result);
 	}
+	else {
+		var arr4 = mkArr4();
+		var result = det(arr4);
+		$("#resultado").append(result);
+	}
 	$("#resultado").css("font-weight", "bold");
 })
 
