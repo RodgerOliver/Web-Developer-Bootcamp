@@ -116,7 +116,11 @@ function det(arr) {
 		return (arr[0][0]*arr[1][1] - arr[0][1]*arr[1][0])
 	}
 
-	return (arr[0][0]*det(delRow_Col(arr,0)) - arr[0][1]*det(delRow_Col(arr,1)) + arr[0][2]*det(delRow_Col(arr,2)));
+	var result = 0;
+	for(j=0; j<arr.length; j++) {
+		result += Math.pow(-1, j)*arr[0][j]*det(delRow_Col(arr, j));
+	}
+	return (result);
 }
 
 function delRow_Col(arr, index) {
