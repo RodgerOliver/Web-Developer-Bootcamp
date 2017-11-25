@@ -102,8 +102,8 @@ function det(arr) {
 	}
 
 	var result = 0;
-	for(j=0; j<arr.length; j++) {
-		result += Math.pow(-1, j)*arr[0][j]*det(delRow_Col(arr, j));
+	for(var i=0; i<arr.length; i++) {
+		result += Math.pow(-1, i)*arr[0][i]*det(delRow_Col(arr, i));
 	}
 	return (result);
 }
@@ -111,13 +111,13 @@ function det(arr) {
 function delRow_Col(arr, index) {
 	var temp = [];
 	// copy the original array
-	for(i=0; i<arr.length; i++) {
+	for(var i=0; i<arr.length; i++) {
 		temp.push(arr[i].slice(0));
 	}
 	// delete the first row
 	temp.splice(0,1);
 	// delete the colomun at the index
-	for(i=0; i<temp.length; i++) {
+	for(var i=0; i<temp.length; i++) {
 		temp[i].splice(index, 1);
 	}
 	return (temp);
