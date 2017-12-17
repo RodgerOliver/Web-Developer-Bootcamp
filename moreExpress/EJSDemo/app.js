@@ -1,15 +1,19 @@
 var express = require("express");
 var app = express();
 
+app.use(express.static("public")); //way to serve the public directory
+app.set("view engine", "ejs"); // way to tell express that the app is using .ejs
+
+
 app.get("/", function(req, res) {
-	res.render("home.ejs", {
+	res.render("home", {
 		title: "Home Page"
 	});
 });
 
 app.get("/love/:thing", function(req, res) {
 	var thing = req.params.thing;
-	res.render("love.ejs", {
+	res.render("love", {
 		title: "Love Page",
 		thingVar: thing
 	});
@@ -21,7 +25,7 @@ app.get("/posts", function(req, res) {
 		{title: "Post 2", author: "Marcio"},
 		{title: "Post 3", author: "Regiane"}
 	];
-	res.render("posts.ejs", {
+	res.render("posts", {
 		title: "Posts",
 		posts: posts
 	})
