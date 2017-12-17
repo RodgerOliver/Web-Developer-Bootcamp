@@ -6,6 +6,17 @@
 <body>
 
 	<h1>You fell in love with <%= thingVar %></h1>
+	
+	<% if(thingVar.toLowerCase() === "rusty") { %>
+		<p>Good Choice, this is the best choice!</p>
+	<% } else{ %>
+		<p>Bad choice, you should have said Rusty!</p>
+	<% } %>
+	<!--
+		<%= %> - this EJS tag sticks the value in the HTML
+		<% %> - this EJS tag just run the code, used in logic like loop and if statements
+	-->
+
 	<p>P.S. this is the love.ejs file</p>
 
 </body>

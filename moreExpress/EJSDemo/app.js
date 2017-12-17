@@ -15,6 +15,18 @@ app.get("/love/:thing", function(req, res) {
 	});
 });
 
+app.get("/posts", function(req, res) {
+	var posts = [
+		{title: "Post 1", author: "Rodger"},
+		{title: "Post 2", author: "Marcio"},
+		{title: "Post 3", author: "Regiane"}
+	];
+	res.render("posts.ejs", {
+		title: "Posts",
+		posts: posts
+	})
+});
+
 
 
 app.get("*", function(req, res) {
