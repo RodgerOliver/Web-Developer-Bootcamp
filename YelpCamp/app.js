@@ -8,8 +8,8 @@ app.use(express.static("public"));
 
 var camps = [
 	{name: "Samom Creek", image: "http://photosforclass.com/download/7360193870"},
-	{name: "Granite Hill", image: "http://photosforclass.com/download/2069978635"},
-	{name: "Mountain Goat's Rest", image: "http://photosforclass.com/download/2770459706"}
+	{name: "Granite Hill", image: "http://photosforclass.com/download/321487195"},
+	{name: "Mountain Goat's Rest", image: "http://photosforclass.com/download/2617191414"}
 ];
 
 
