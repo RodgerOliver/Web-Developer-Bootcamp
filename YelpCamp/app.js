@@ -1,16 +1,15 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var fs = require("fs");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-var camps = [
-	{name: "Samom Creek", image: "http://photosforclass.com/download/7360193870"},
-	{name: "Granite Hill", image: "http://photosforclass.com/download/321487195"},
-	{name: "Mountain Goat's Rest", image: "http://photosforclass.com/download/2617191414"}
-];
+var DB = "dataBase/data.js";
+var file = fs.readFileSync(DB);
+var camps = JSON.parse(file);
 
 
 app.get("/", function(req, res) {
@@ -26,8 +25,10 @@ app.get("/camps", function(req, res) {
 app.post("/camps", function(req, res) {
 	var name = req.body.name;
 	var url = req.body.url;
-	var newCamp = {name: name, image: url}
+	var newCamp = {"name": name, "image": url}
 	camps.push(newCamp);
+	var campsString = JSON.stringify(camps, null, 2);
+	fs.writeFile(DB, campsString);
 	res.redirect("/camps");
 });
 
