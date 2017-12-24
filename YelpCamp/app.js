@@ -1,15 +1,21 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var fs = require("fs");
+var mongoose = require("mongoose");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-var DB = "dataBase/data.js";
-var file = fs.readFileSync(DB);
-var camps = JSON.parse(file);
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost:27017/yelp_camp", {useMongoClient: true});
+
+// schema and model setup
+var campSchema = new mongoose.Schema({
+	name: String,
+	image: String
+});
+var Camp = mongoose.model("Camp", campSchema);
 
 
 app.get("/", function(req, res) {
@@ -17,19 +23,29 @@ app.get("/", function(req, res) {
 });
 
 app.get("/camps", function(req, res) {
-	res.render("camps", {
-		camps: camps
+	// get all the campgrounds
+	Camp.find({}, function(err, camps) {
+		if(err) {
+			console.log(err);
+		} else {
+			res.render("camps", {camps: camps});
+		}
 	});
+
 });
 
 app.post("/camps", function(req, res) {
 	var name = req.body.name;
 	var url = req.body.url;
-	var newCamp = {"name": name, "image": url}
-	camps.push(newCamp);
-	var campsString = JSON.stringify(camps, null, 2);
-	fs.writeFile(DB, campsString);
-	res.redirect("/camps");
+	var newCamp = {name: name, image: url};
+	// create and add a new campground
+	Camp.create(newCamp, function(err, newCamp) {
+		if(err) {
+			console.log(err);
+		} else {
+			res.redirect("/camps");	
+		}
+	});
 });
 
 app.get("/camps/new", function(req, res) {
