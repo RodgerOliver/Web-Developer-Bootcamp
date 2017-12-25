@@ -1,4 +1,5 @@
-var	methodOverride = require("method-override"),
+var	expressSanitizer = require("express-sanitizer"),
+	methodOverride = require("method-override"),
 	bodyParser 	= require("body-parser"),
 	mongoose 	= require("mongoose"),
 	express 	= require("express"),
@@ -8,8 +9,8 @@ var	methodOverride = require("method-override"),
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
-// what methodOverride will look for in the url
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 // Mongoose Connect
 mongoose.connect("mongodb://localhost:27017/blog_app", {useMongoClient: true});
 mongoose.Promise = global.Promise;
@@ -48,6 +49,7 @@ app.get("/posts/new", function(req, res) {
 
 // CREATE ROUTE
 app.post("/posts", function(req, res) {
+	req.body.post.body = req.sanitize(req.body.post.body);
 	var newPost = req.body.post;
 	Post.create(newPost, function (err, newPost) {
 		if(err) {
@@ -85,6 +87,7 @@ app.get("/posts/:id/edit", function(req, res) {
 // UPDATE ROUTE
 app.put("/posts/:id", function(req, res) {
 	var id = req.params.id;
+	req.body.post.body = req.sanitize(req.body.post.body);
 	var updatedPost = req.body.post;
 	Post.findByIdAndUpdate(id, updatedPost, function(err, post) {
 		if(err) {

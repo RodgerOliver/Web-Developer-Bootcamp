@@ -1,8 +1,8 @@
 <% include partials/header %>
 
-<div class="ui main container text segment">
+<div class="ui main container text segment clearfix">
 	<div class="ui huge header">Edit <em><%= post.title %></em> Post</div>
-	<form style="overflow: hidden;" class="ui form" action="/posts/<%= post._id %>?_method=PUT" method="POST">
+	<form class="ui form" action="/posts/<%= post._id %>?_method=PUT" method="POST">
 		<div class="field">
 			<label>Title</label>
 			<input type="text" name="post[title]" value="<%= post.title %>">
@@ -15,8 +15,10 @@
 			<label>Blog Content</label>
 			<textarea name="post[body]" placeholder="Content"><%= post.body %></textarea>
 		</div>
-		<input style="float: right;" class="ui green big inverted button" type="submit" value="Update">
-		<span style="float: left;"><a class="ui red big inverted button" href="/posts/<%= post._id %>">Go Back</a></span>
+		<div>
+			<input class="ui green big inverted button right" type="submit" value="Update">
+			<a class="ui red big inverted button left" href="/posts/<%= post._id %>">Go Back</a>
+		</div>
 	</form>
 </div>
 

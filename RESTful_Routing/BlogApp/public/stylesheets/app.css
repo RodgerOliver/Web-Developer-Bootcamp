@@ -9,3 +9,21 @@ i.icon {
 img {
 	width: 100%;
 }
+
+.right {
+	display: inline-block;
+	float: right;
+}
+
+.left {
+	display: inline-block;
+	float: left;
+}
+
+.clearfix {
+	overflow: hidden;
+}
+
+.utilities {
+	margin-top: 1em;
+}
