@@ -95,6 +95,18 @@ app.put("/posts/:id", function(req, res) {
 	});
 });
 
+// DESTROY ROUTE
+app.delete("/posts/:id", function(req, res) {
+	var id = req.params.id;
+	Post.findByIdAndRemove(id, function(err) {
+		if(err) {
+			res.redirect("/posts/" + id);
+		} else {
+			res.redirect("/posts");
+		}
+	});
+});
+
 app.listen(3000, function() {
 	console.log("Working on port 3000");
 });
