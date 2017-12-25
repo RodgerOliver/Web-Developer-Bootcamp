@@ -1,12 +1,14 @@
 <% include partials/header %>
 
-<% posts.forEach(function(post) { %>
-	<div>
-		<h3><%= post.title %></h3>
-		<img src="<%= post.image %>">
-		<p><%= post.body %></p>
-		<p><%= post.created %></p>
-	</div>
-<% }); %>
+<div class="ui container main">
+	<% posts.forEach(function(post) { %>
+		<div>
+			<h3><%= post.title %></h3>
+			<img src="<%= post.image %>">
+			<p><%= post.body %></p>
+			<p><%= post.created %></p>
+		</div>
+	<% }); %>
+</div>
 
 <% include partials/footer %>

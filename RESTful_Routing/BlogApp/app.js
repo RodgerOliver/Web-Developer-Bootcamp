@@ -27,12 +27,29 @@ app.get("/", function(req, res) {
 	res.redirect("/posts");
 });
 
+// INDEX ROUTE
 app.get("/posts", function(req, res) {
 	Post.find({}, function(err, posts) {
 		if(err) {
 			console.log(err);
 		} else {
 			res.render("index", {posts: posts});
+		}
+	});
+});
+
+// NEW ROUTE
+app.get("/posts/new", function(req, res) {
+	res.render("new");
+});
+
+// CREATE ROUTE
+app.post("/posts", function(req, res) {
+	Post.create(req.body.post, function (err, newPost) {
+		if(err) {
+			res.render("new");
+		} else {
+			res.redirect("/posts");
 		}
 	});
 });
