@@ -5,8 +5,10 @@
 		<div>
 			<h3><%= post.title %></h3>
 			<img src="<%= post.image %>">
-			<p><%= post.body %></p>
+			<!-- substring limits the amount of characters that will show -->
+			<p><%= post.body.substring(0, 150) %>...</p>
 			<p><%= post.created %></p>
+			<a class="ui purple inverted button" href="/posts/<%= post._id %>">Read More</a>
 		</div>
 	<% }); %>
 </div>

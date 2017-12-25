@@ -1,0 +1,19 @@
+<% include partials/header %>
+
+<div class="ui text segment container main">
+	<div class="ui huge header"><%= post.title %></div>
+	<div class="ui top attached">
+		<div class="item">
+			<img class="ui centered rounded image" src="<%= post.image %>">
+			<div class="content">
+				<span><%= post.created.toDateString() %></span>
+			</div>
+			<div class="description">
+				<!-- the "<%- %>" ejs tag render the html code that was passed in -->
+				<p><%- post.body %></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include partials/footer %>

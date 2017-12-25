@@ -45,13 +45,26 @@ app.get("/posts/new", function(req, res) {
 
 // CREATE ROUTE
 app.post("/posts", function(req, res) {
-	Post.create(req.body.post, function (err, newPost) {
+	var newPost = req.body.post;
+	Post.create(newPost, function (err, newPost) {
 		if(err) {
 			res.render("new");
 		} else {
 			res.redirect("/posts");
 		}
 	});
+});
+
+// SHOW ROUTE
+app.get("/posts/:id", function(req, res) {
+	var id = req.params.id;
+	Post.findById(id, function(err, post) {
+		if(err) {
+			re.redirect("/posts");
+		} else {
+			res.render("show", {post: post});
+		}
+	})
 });
 
 app.listen(3000, function() {
