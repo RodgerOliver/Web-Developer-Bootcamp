@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restful Blog App</title>
+</head>
+<body>
+
+	<% posts.forEach(function(post) { %>
+		<div>
+			<h3><%= post.title %></h3>
+			<img src="<%= post.image %>">
+			<p><%= post.body %></p>
+			<p><%= post.created %></p>
+		</div>
+	<% }); %>
+
+</body>
+</html>
