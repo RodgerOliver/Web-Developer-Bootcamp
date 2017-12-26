@@ -1,0 +1,15 @@
+.container.main.ui {
+	margin-top: 5em;
+}
+
+.content {
+	padding: 1em;
+}
+
+.utilities {
+	margin-top: 1em;
+}
+
+img.ui.image {
+	max-width: 200px;
+}

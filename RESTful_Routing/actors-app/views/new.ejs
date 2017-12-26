@@ -1,0 +1,33 @@
+<% include partials/header %>
+
+<div class="ui container main text">
+	<div class="ui huge header">Add a New Actor</div>
+	<form class="ui form" action="/actors" method="POST">
+		<div class="field">
+			<label>Infromation</label>
+			<div class="fields">
+				<div class="twelve wide field">
+					<input type="text" name="actor[name]" placeholder="Name">
+				</div>
+				<div class="four wide field">
+					<input type="number" name="actor[age]" placeholder="Age">
+				</div>
+			</div>
+		</div>
+		<div class="field">
+			<label>Image Url</label>
+			<input type="url" name="actor[image]" placeholder="Image Url">
+		</div>
+		<div class="field">
+			<label>Films Actted By Him</label>
+			<input type="text" name="actor[films]" placeholder="Films actted by him">
+		</div>
+		<div class="field">
+			<label>Description</label>
+			<textarea name="actor[description]" placeholder="Write a little bit about the actor"></textarea>
+		</div>
+		<button class="ui button green inverted">Add</button>
+	</form>
+</div>
+
+<% include partials/footer %>

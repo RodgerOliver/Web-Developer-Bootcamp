@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+	<div class="ui container main text">
+		<div class="ui huge header">Actors App</div>
+		<div class="ui top attached segment">
+			<div class="ui divided items">
+				<% actors.forEach(function(actor) { %>
+				<div class="item">
+					<div class="image">
+						<img src="<%= actor.image %>">
+					</div>
+					<div class="content">
+						<a href="/actors/<%= actor._id %>"><%= actor.name %></a>
+						<div class="description">
+							<p><%= actor.description.substring(0, 100) %>...</p>
+						</div>
+						<div class="extra">
+							<a class="ui blue basic button" href="/actors/<%= actor._id %>">
+								Read More
+								<i class="right chevron icon"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+
+<% include partials/footer %>
