@@ -46,34 +46,41 @@ var data = [
 ];
 
 function seedDB() {
-	// REMOVE ALL CAMPS
-	Camp.remove({}, function(err) {
+	// REMOVE ALL COMMENTS AND CAMPS
+	Comment.remove({}, function(err, removedComments) {
 		if(err) {
 			console.log(err);
 		} else {
-			console.log("Removed Camps");
-			// ADD SOME CAMPS
-			data.forEach(function(seed) {
-				Camp.create(seed, function(err, campground) {
-					if(err) {
-						console.log(err);
-					} else {
-						console.log("ADDED A CAMPGROUND");
-						// CREATE A COMMENT FOR EACH CAMP
-						Comment.create({
-							text: "Thisplace is great, but I wish there was internet",
-							author: "Homer"
-						}, function(err, comment) {
+			console.log("REMOVED ALL COMMENTS")
+			Camp.remove({}, function(err) {
+				if(err) {
+					console.log(err);
+				} else {
+					console.log("REMOVED ALL CAMPS");
+					// ADD SOME CAMPS
+					data.forEach(function(seed) {
+						Camp.create(seed, function(err, campground) {
 							if(err) {
 								console.log(err);
 							} else {
-								campground.comments.push(comment);
-								campground.save();
-								console.log("CREATED A NEW COMMENT");
+								console.log("ADDED A CAMPGROUND");
+								// CREATE A COMMENT FOR EACH CAMP
+								Comment.create({
+									text: "This place is great, but I wish there was internet",
+									author: "Homer"
+								}, function(err, comment) {
+									if(err) {
+										console.log(err);
+									} else {
+										campground.comments.push(comment);
+										campground.save();
+										console.log("CREATED A NEW COMMENT");
+									}
+								});
 							}
 						});
-					}
-				});
+					});
+				}
 			});
 		}
 	});

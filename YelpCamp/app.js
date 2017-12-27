@@ -5,10 +5,10 @@ var bodyParser = require("body-parser"),
 	Camp 			= require("./models/camp"),
 	seedDB 		= require("./seeds");
 
-seedDB();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
+seedDB();
 
 // mongoose setup
 mongoose.Promise = global.Promise;
@@ -29,7 +29,6 @@ app.get("/camps", function(req, res) {
 			res.render("index", {camps: camps});
 		}
 	});
-
 });
 
 // CREATE - add new camp to DB
@@ -55,19 +54,21 @@ app.get("/camps/new", function(req, res) {
 
 // SHOW - show more info about one camp
 app.get("/camps/:id", function(req, res) {
-	// find the camp with provide ID
+	// find the camp with provided ID
 	var id = req.params.id;
-	Camp.findById(id, function(err, campById) {
+	// fill the 'comment' field of the camp
+	Camp.findById(id).populate("comments").exec(function(err, campById) {
 		if(err) {
 			console.log(err);
 		} else {
+			console.log(campById);
 			// show template with that camp
 			res.render("show", {
 				camp: campById
 			});
 		}
-	})
-})
+	});
+});
 
 app.listen(3000, function() {
 	console.log("Working on port 3000!");
