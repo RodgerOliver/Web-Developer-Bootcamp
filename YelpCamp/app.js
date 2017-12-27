@@ -2,8 +2,10 @@ var bodyParser = require("body-parser"),
 	mongoose 	= require("mongoose"),
 	express 		= require("express"),
 	app 			= express(),
-	Camp 			= require("./models/camp");
+	Camp 			= require("./models/camp"),
+	seedDB 		= require("./seeds");
 
+seedDB();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
