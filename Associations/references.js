@@ -1,29 +1,9 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/blog_ref", {useMongoClient: true});
 mongoose.Promise = global.Promise;
-
-// =============== SETUP SCHEMAS AND MODELS (ALWAYS) ===============
-// POST - title, content
-var postSchema = new mongoose.Schema({
-	title: String,
-	content: String
-});
-
-var Post = mongoose.model("Post", postSchema);
-
-// USER - name, email
-var userSchema = new mongoose.Schema({
-	name: String,
-	email: String,
-	posts: [
-		{
-			type: mongoose.Schema.Types.ObjectId, // Way to especify that this is an ID
-			ref: "Post"
-		}
-	]
-}, {usePushEach: true});
-
-var User = mongoose.model("User", userSchema);
+// =============== REQUIRING MODELS ===============
+var Post = require("./models/post"); // "./" is the reference of where we are
+var User = require("./models/user");
 
 // =============== CREATE ONE USER AND ONE POST (FIRST RUN) ===============
 User.create({
