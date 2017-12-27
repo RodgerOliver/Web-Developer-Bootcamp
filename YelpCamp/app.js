@@ -1,7 +1,8 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+var bodyParser = require("body-parser"),
+	mongoose 	= require("mongoose"),
+	express 		= require("express"),
+	app 			= express(),
+	Camp 			= require("./models/camp");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -9,15 +10,7 @@ app.use(express.static("public"));
 
 // mongoose setup
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {useMongoClient: true});
-
-// schema and model setup
-var campSchema = new mongoose.Schema({
-	name: String,
-	image: String,
-	description: String
-});
-var Camp = mongoose.model("Camp", campSchema);
+mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
 
 
 app.get("/", function(req, res) {
