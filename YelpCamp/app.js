@@ -3,6 +3,7 @@ var bodyParser = require("body-parser"),
 	express 		= require("express"),
 	app 			= express(),
 	Camp 			= require("./models/camp"),
+	Comment 			= require("./models/comment"),
 	seedDB 		= require("./seeds");
 
 app.set("view engine", "ejs");
@@ -26,7 +27,7 @@ app.get("/camps", function(req, res) {
 		if(err) {
 			console.log(err);
 		} else {
-			res.render("index", {camps: camps});
+			res.render("camps/index", {camps: camps});
 		}
 	});
 });
@@ -49,7 +50,7 @@ app.post("/camps", function(req, res) {
 
 // NEW - show form to create a new camp
 app.get("/camps/new", function(req, res) {
-	res.render("new");
+	res.render("camps/new");
 });
 
 // SHOW - show more info about one camp
@@ -61,10 +62,49 @@ app.get("/camps/:id", function(req, res) {
 		if(err) {
 			console.log(err);
 		} else {
-			console.log(campById);
 			// show template with that camp
-			res.render("show", {
+			res.render("camps/show", {
 				camp: campById
+			});
+		}
+	});
+});
+
+// NEW - show form to create a new comment
+app.get("/camps/:id/comments/new", function(req, res) {
+	var id = req.params.id;
+	Camp.findById(id, function(err, camp) {
+		if(err) {
+			console.log(err);
+		} else {
+			res.render("comments/new", {camp: camp});
+		}
+	});
+});
+
+// CREATE - add new comment to DB
+app.post("/camps/:id/comments", function(req, res) {
+	var id = req.params.id;
+	var comment = req.body.comment;
+	Camp.findById(id, function(err, camp) {
+		if(err) {
+			console.log(err);
+			res.redirect("/camps");
+		} else {
+			Comment.create(comment, function(err, newComment) {
+				if(err) {
+					console.log(err);
+					res.redirect("/camps/" + id);
+				} else {
+					camp.comments.push(newComment);
+					camp.save(function(err, data) {
+						if(err) {
+							console.log(err);
+						} else {
+							res.redirect("/camps/" + id);
+						}
+					})
+				}
 			});
 		}
 	});
