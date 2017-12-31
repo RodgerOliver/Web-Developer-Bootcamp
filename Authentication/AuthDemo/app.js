@@ -30,12 +30,13 @@ passport.deserializeUser(User.deserializeUser());// Read, take the data and UNEN
 app.get("/", function(req, res) {
 	res.render("home");
 });
-
-app.get("/secret", function(req, res) {
+// another middleware to check if the user is logged in
+app.get("/secret", isLoggedIn, function(req, res) {
 	res.render("secret");
 });
 
 // AUTH ROUTES
+// ----- Register -----
 app.get("/register", function(req, res) {
 	res.render("register");
 });
@@ -55,6 +56,7 @@ app.post("/register", function(req, res) {
 	});
 });
 
+// ----- Login -----
 app.get("/login", function(req, res) {
 	res.render("login");
 });
@@ -67,6 +69,19 @@ app.post("/login", passport.authenticate("local", {
 
 });
 
+// ----- Logout -----
+app.get("/logout", function(req, res) {
+	req.logout();
+	res.redirect("/");
+});
+
 app.listen(3000, function() {
 	console.log("Working on port 3000!");
 });
+
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect("/login");
+}
