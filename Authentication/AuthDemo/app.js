@@ -34,6 +34,26 @@ app.get("/secret", function(req, res) {
 	res.render("secret");
 });
 
+// AUTH ROUTES
+app.get("/register", function(req, res) {
+	res.render("register");
+});
+
+app.post("/register", function(req, res) {
+	var name = req.body.name;
+	var password = req.body.password;
+	User.register(new User({username: name}), password, function (err, user) {
+		if(err) {
+			console.log(err);
+			res.render("register");
+		} else {
+			passport.authenticate("local")(req, res, function() {
+				res.redirect("/secret");
+			});
+		}
+	});
+});
+
 app.listen(3000, function() {
 	console.log("Working on port 3000!");
 });
