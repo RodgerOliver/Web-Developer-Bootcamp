@@ -21,6 +21,7 @@ app.use(expressSession({
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()); // Read, take the data and ENCODE the session
 passport.deserializeUser(User.deserializeUser());// Read, take the data and UNENCODE the session
 
@@ -40,9 +41,9 @@ app.get("/register", function(req, res) {
 });
 
 app.post("/register", function(req, res) {
-	var name = req.body.name;
+	var username = req.body.username;
 	var password = req.body.password;
-	User.register(new User({username: name}), password, function (err, user) {
+	User.register(new User({username: username}), password, function (err, user) {
 		if(err) {
 			console.log(err);
 			res.render("register");
@@ -52,6 +53,18 @@ app.post("/register", function(req, res) {
 			});
 		}
 	});
+});
+
+app.get("/login", function(req, res) {
+	res.render("login");
+});
+
+// middleware - some code that runs between the start and the end of the route
+app.post("/login", passport.authenticate("local", {
+	successRedirect: "/secret",
+	failureRedirect: "/login"
+}), function(req, res) {
+
 });
 
 app.listen(3000, function() {
