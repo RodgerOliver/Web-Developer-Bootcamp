@@ -1,10 +1,15 @@
-var bodyParser = require("body-parser"),
-	mongoose 	= require("mongoose"),
-	express 		= require("express"),
-	app 			= express(),
-	Camp 			= require("./models/camp"),
-	Comment 			= require("./models/comment"),
-	seedDB 		= require("./seeds");
+var	passportMongoose	= require("passport-local-mongoose"),
+	Comment				= require("./models/comment"),
+	LocalStrategy		= require("passport-local"),
+	Camp				= require("./models/camp"),
+	User				= require("./models/user"),
+	bodyParser			= require("body-parser"),
+	passport			= require("passport"),
+	mongoose			= require("mongoose"),
+	express				= require("express"),
+	expressSession		= require("express-session"),
+	seedDB				= require("./seeds"),
+	app					= express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -15,7 +20,23 @@ seedDB();
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
 
+// express session setup
+app.use(expressSession({
+	secret: "Parkour",
+	resave: false,
+	saveUninitialized: false
+}))
 
+// passport setup
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// ===============
+// ROUTES
+// ===============
 app.get("/", function(req, res) {
 	res.render("home");
 });
