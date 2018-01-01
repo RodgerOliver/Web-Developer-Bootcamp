@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Camp = require("./models/camp");
 var Comment = require("./models/comment");
+var User = require("./models/user");
 
 var data = [
 	{
@@ -46,6 +47,20 @@ var data = [
 ];
 
 function seedDB() {
+	User.remove({}, function (err, okay) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log("REMOVED ALL USERS");
+			User.register({username: "Rodger"}, "rodger", function(err, rodger) {
+				if(err) {
+					console.log(er);
+				} else {
+					console.log("Rodger user created!");
+				}
+			});
+		}
+	});
 	// REMOVE ALL COMMENTS AND CAMPS
 	Comment.remove({}, function(err, removedComments) {
 		if(err) {
