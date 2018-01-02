@@ -54,52 +54,65 @@ function seedDB() {
 			console.log("REMOVED ALL USERS");
 			User.register({username: "Rodger"}, "rodger", function(err, rodger) {
 				if(err) {
-					console.log(er);
+					console.log(err);
 				} else {
 					console.log("Rodger user created!");
 				}
 			});
-		}
-	});
-	// REMOVE ALL COMMENTS AND CAMPS
-	Comment.remove({}, function(err, removedComments) {
-		if(err) {
-			console.log(err);
-		} else {
-			console.log("REMOVED ALL COMMENTS")
-			Camp.remove({}, function(err) {
+			User.register({username: "Homer"}, "homer", function(err, rodger) {
 				if(err) {
 					console.log(err);
 				} else {
-					console.log("REMOVED ALL CAMPS");
-					// ADD SOME CAMPS
-					data.forEach(function(seed) {
-						Camp.create(seed, function(err, campground) {
-							if(err) {
-								console.log(err);
-							} else {
-								console.log("ADDED A CAMPGROUND");
-								// // CREATE A COMMENT FOR EACH CAMP
-								// Comment.create({
-								// 	text: "This place is great, but I wish there was internet",
-								// 	author: "Homer"
-								// }, function(err, comment) {
-								// 	if(err) {
-								// 		console.log(err);
-								// 	} else {
-								// 		campground.comments.push(comment);
-								// 		campground.save();
-								// 		console.log("CREATED A NEW COMMENT");
-								// 	}
-								// });
-							}
-						});
+					console.log("Homer user created!");
+					// REMOVE ALL COMMENTS AND CAMPS
+					Comment.remove({}, function(err, removedComments) {
+						if(err) {
+							console.log(err);
+						} else {
+							console.log("REMOVED ALL COMMENTS")
+							Camp.remove({}, function(err) {
+								if(err) {
+									console.log(err);
+								} else {
+									console.log("REMOVED ALL CAMPS");
+									// ADD SOME CAMPS
+									data.forEach(function(seed) {
+										Camp.create(seed, function(err, campground) {
+											if(err) {
+												console.log(err);
+											} else {
+												console.log("ADDED A CAMPGROUND");
+												User.findOne({username: "Homer"}, function(err, user) {
+													// CREATE A COMMENT FOR EACH CAMP
+													Comment.create({
+														text: "This place is great, but I wish there was internet",
+														author: {
+															id: user._id,
+															username: user.username
+														}
+													}, function(err, comment) {
+														if(err) {
+															console.log(err);
+														} else {
+															campground.author.id = user._id;
+															campground.author.username = user.username;
+															campground.comments.push(comment);
+															campground.save();
+															console.log("CREATED A NEW COMMENT");
+														}
+													});
+												});
+											}
+										});
+									});
+								}
+							});
+						}
 					});
 				}
 			});
 		}
 	});
-
 }
 
 module.exports = seedDB;
