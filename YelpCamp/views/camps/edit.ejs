@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+
+<div class="container">
+	<h1 class="text-center">Edit the Campground <%= camp.name %></h1>
+	<div class="form">
+		<form action="/camps/<%= camp._id %>?_method=PUT" method="POST">
+			<div class="form-group">
+				<input class="form-control" type="text" name="update[name]" value="<%= camp.name %>" required>
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="url" name="update[url]" value="<%= camp.image %>" required>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" name="update[description]" required><%= camp.description %></textarea>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
+			</div>
+		</form>
+		<a href="/camps/<%= camp._id %>">Go Back</a>
+	</div>
+</div>
+
+<% include ../partials/footer %>

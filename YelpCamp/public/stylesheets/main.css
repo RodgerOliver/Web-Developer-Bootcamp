@@ -19,6 +19,10 @@ p.card-text {
 	margin: 0;
 }
 
+.card-body a.btn-warning {
+	color: white;
+}
+
 .right {
 	float: right;
 }

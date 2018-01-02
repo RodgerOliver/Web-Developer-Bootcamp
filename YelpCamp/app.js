@@ -1,5 +1,7 @@
 var	passportMongoose	= require("passport-local-mongoose"),
 	Comment				= require("./models/comment"),
+	expressSession		= require("express-session"),
+	methodOverride		= require("method-override"),
 	LocalStrategy		= require("passport-local"),
 	Camp				= require("./models/camp"),
 	User				= require("./models/user"),
@@ -7,7 +9,6 @@ var	passportMongoose	= require("passport-local-mongoose"),
 	passport			= require("passport"),
 	mongoose			= require("mongoose"),
 	express				= require("express"),
-	expressSession		= require("express-session"),
 	seedDB				= require("./seeds"),
 	app					= express();
 
@@ -18,6 +19,7 @@ var campsRoutes		= require("./routes/camps"),
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 seedDB();
 
