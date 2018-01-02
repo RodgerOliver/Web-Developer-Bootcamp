@@ -29,6 +29,9 @@ router.post("/", isLoggedIn, function(req, res) {
 					console.log(err);
 					res.redirect("/camps/" + id);
 				} else {
+					newComment.author.id = req.user._id;
+					newComment.author.username = req.user.username;
+					newComment.save();
 					camp.comments.push(newComment);
 					camp.save(function(err, data) {
 						if(err) {

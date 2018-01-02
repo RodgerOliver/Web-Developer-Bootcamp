@@ -79,19 +79,19 @@ function seedDB() {
 								console.log(err);
 							} else {
 								console.log("ADDED A CAMPGROUND");
-								// CREATE A COMMENT FOR EACH CAMP
-								Comment.create({
-									text: "This place is great, but I wish there was internet",
-									author: "Homer"
-								}, function(err, comment) {
-									if(err) {
-										console.log(err);
-									} else {
-										campground.comments.push(comment);
-										campground.save();
-										console.log("CREATED A NEW COMMENT");
-									}
-								});
+								// // CREATE A COMMENT FOR EACH CAMP
+								// Comment.create({
+								// 	text: "This place is great, but I wish there was internet",
+								// 	author: "Homer"
+								// }, function(err, comment) {
+								// 	if(err) {
+								// 		console.log(err);
+								// 	} else {
+								// 		campground.comments.push(comment);
+								// 		campground.save();
+								// 		console.log("CREATED A NEW COMMENT");
+								// 	}
+								// });
 							}
 						});
 					});
