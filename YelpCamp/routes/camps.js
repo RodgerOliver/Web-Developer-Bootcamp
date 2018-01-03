@@ -53,7 +53,7 @@ router.get("/:id", function(req, res) {
 });
 
 // EDIT ROUTE
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", checkUser, function(req, res) {
 	var id = req.params.id;
 	Camp.findById(id, function(err, camp) {
 		if(err) {
@@ -65,7 +65,7 @@ router.get("/:id/edit", function(req, res) {
 });
 
 // UPDATE ROUTE
-router.put("/:id", function(req, res) {
+router.put("/:id", checkUser, function(req, res) {
 	var id = req.params.id;
 	var updateCamp = req.body.update;
 	Camp.findByIdAndUpdate(id, updateCamp, function(err, camp) {
@@ -79,7 +79,7 @@ router.put("/:id", function(req, res) {
 });
 
 // DESTROY ROUTE
-router.delete("/:id", function(req, res) {
+router.delete("/:id", checkUser, function(req, res) {
 	var id = req.params.id;
 	Camp.findByIdAndRemove(id, function(err) {
 		if(err) {
@@ -92,7 +92,7 @@ router.delete("/:id", function(req, res) {
 });
 
 
-// middleware
+// Middlewares
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()) {
 		return next();
@@ -100,4 +100,18 @@ function isLoggedIn(req, res, next) {
 	res.redirect("/login");
 }
 
+function checkUser(req, res, next) {
+	var id = req.params.id;
+	Camp.findById(id, function(err, camp) {
+		if(err) {
+			console.log(err);
+			res.redirect("/camps");
+		} else {
+			if(req.user && req.user._id.toString() === camp.author.id.toString()) {
+				return next();
+			}
+			res.redirect("/camps/" + id);
+		}
+	});
+}
 module.exports = router;

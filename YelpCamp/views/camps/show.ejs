@@ -22,7 +22,9 @@
 						<p class="card-text col-md-6 text-right font-weight-bold">$9.00/night</p>
 					</div>
 					<p class="card-text my-3"><%= camp.description %></p>
+				<% if(user && user._id.toString() === camp.author.id.toString()) { %>
 					<a class="btn btn-warning" href="/camps/<%= camp._id %>/edit">Edit Campground</a>
+				<% } %>
 				</div>
 				<div class="card-footer">
 					<div class="text-right">
