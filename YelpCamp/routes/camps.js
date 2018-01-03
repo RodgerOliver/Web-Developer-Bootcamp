@@ -78,6 +78,19 @@ router.put("/:id", function(req, res) {
 	});
 });
 
+// DESTROY ROUTE
+router.delete("/:id", function(req, res) {
+	var id = req.params.id;
+	Camp.findByIdAndRemove(id, function(err) {
+		if(err) {
+			console.log(err);
+			res.redirect("/camps/" + id);
+		} else {
+			res.redirect("/camps");
+		}
+	});
+});
+
 
 // middleware
 function isLoggedIn(req, res, next) {

@@ -30,3 +30,15 @@ p.card-text {
 .left {
 	float: left;
 }
+
+.delBtn {
+	border: 0 none;
+	background: 0 none;
+	color: red;
+}
+
+.delBtn:hover {
+	color: crimson;
+	text-decoration: underline;
+	cursor: pointer;
+}
