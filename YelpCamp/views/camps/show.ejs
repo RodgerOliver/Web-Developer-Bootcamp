@@ -36,7 +36,10 @@
 						<div class="col-md-12">
 							<span class="right text-muted">10 days ago</span>
 							<p class="card-text"><strong><%= comment.author.username %></strong></p>
-							<p><%= comment.text %></p>
+							<p>
+								<%= comment.text %>
+								<a class="right" href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit">Edit</a>
+							</p>
 						</div>
 					</div>
 					<% }); %>
