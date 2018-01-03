@@ -29,7 +29,7 @@ router.post("/", isLoggedIn, function(req, res) {
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect("/camps");
+			res.redirect("/camps/" + newCamp._id);
 		}
 	});
 });
@@ -107,7 +107,7 @@ function checkUser(req, res, next) {
 			console.log(err);
 			res.redirect("/camps");
 		} else {
-			if(req.user && req.user._id.toString() === camp.author.id.toString()) {
+			if(req.user && req.user._id.equals(camp.author.id)) {
 				return next();
 			}
 			res.redirect("/camps/" + id);
