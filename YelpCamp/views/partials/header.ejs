@@ -17,8 +17,8 @@
 			</ul>
 			<ul class="navbar-nav ml-auto">
 			<% if(!user) { %>
-				<li class="nav-item active"><a class="nav-link" href="/register">Sign Up</a></li>
 				<li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
+				<li class="nav-item active"><a class="nav-link" href="/register">Sign Up</a></li>
 			<% } else { %>
 				<li class="nav-item active"><a class="nav-link">Logged In as <%= user.username %></a></li>
 				<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>

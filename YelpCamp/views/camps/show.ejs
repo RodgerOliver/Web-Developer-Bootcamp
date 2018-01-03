@@ -38,7 +38,9 @@
 							<p class="card-text"><strong><%= comment.author.username %></strong></p>
 							<p>
 								<%= comment.text %>
+							<% if(user && user._id.equals(comment.author.id)) { %>
 								<a class="right" href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit">Edit</a>
+							<% } %>
 							</p>
 						</div>
 					</div>
