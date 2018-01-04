@@ -2,9 +2,10 @@ var express = require("express");
 var router = express.Router({mergeParams: true}); // this object makes the params available here
 var Camp = require("../models/camp");
 var Comment = require("../models/comment");
+var middleware = require("../middlewares"); // give a directory, it searchs for "index.js"
 
 // NEW ROUTE
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
 	var id = req.params.id;
 	Camp.findById(id, function(err, camp) {
 		if(err) {
@@ -16,7 +17,7 @@ router.get("/new", isLoggedIn, function(req, res) {
 });
 
 // CREATE ROUTE
-router.post("/", isLoggedIn, function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
 	var id = req.params.id;
 	var comment = req.body.comment;
 	Camp.findById(id, function(err, camp) {
@@ -47,7 +48,7 @@ router.post("/", isLoggedIn, function(req, res) {
 });
 
 // EDIT ROUTE
-router.get("/:commentId/edit", checkUser, function(req, res) {
+router.get("/:commentId/edit", middleware.checkUserComment, function(req, res) {
 	var campId = req.params.id;
 	var commentId = req.params.commentId;
 	Comment.findById(commentId, function(err, comment) {
@@ -61,7 +62,7 @@ router.get("/:commentId/edit", checkUser, function(req, res) {
 });
 
 // UPDATE ROUTE
-router.put("/:commentId", checkUser, function(req, res) {
+router.put("/:commentId", middleware.checkUserComment, function(req, res) {
 	var campId = req.params.id;
 	var commentId = req.params.commentId;
 	var newComment = req.body.comment;
@@ -76,7 +77,7 @@ router.put("/:commentId", checkUser, function(req, res) {
 });
 
 // DESTROY ROUTE
-router.delete("/:commentId", checkUser, function(req, res) {
+router.delete("/:commentId", middleware.checkUserComment, function(req, res) {
 	var campId = req.params.id;
 	var commentId = req.params.commentId;
 	Comment.findByIdAndRemove(commentId, function(err) {
@@ -88,26 +89,5 @@ router.delete("/:commentId", checkUser, function(req, res) {
 		}
 	});
 });
-
-
-// Middlewares
-function isLoggedIn(req, res, next) {
-	if(req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect("/login");
-}
-
-function checkUser(req, res, next) {
-	var campId = req.params.id;
-	var commentId = req.params.commentId;
-	Comment.findById(commentId, function(err, comment) {
-		if(req.user && req.user._id.equals(comment.author.id)) {
-			return next();
-		}
-		res.redirect("/camps/" + campId);
-	});
-
-}
 
 module.exports = router;

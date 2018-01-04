@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Camp = require("../models/camp");
+var middleware = require("../middlewares");
 
 // INDEX - show all camps
 router.get("/", function(req, res) {
@@ -14,14 +15,14 @@ router.get("/", function(req, res) {
 });
 
 // CREATE - add new camp to DB
-router.post("/", isLoggedIn, function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
 	var name = req.body.name;
-	var url = req.body.url;
+	var image = req.body.image;
 	var description = req.body.description;
 	var author = {id: req.user._id, username: req.user.username};
 	var newCamp = {
 		name: name,
-		image: url,
+		image: image,
 		description: description,
 		author: author
 	};
@@ -35,7 +36,7 @@ router.post("/", isLoggedIn, function(req, res) {
 });
 
 // NEW - show form to create a new camp
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
 	res.render("camps/new");
 });
 
@@ -53,7 +54,7 @@ router.get("/:id", function(req, res) {
 });
 
 // EDIT ROUTE
-router.get("/:id/edit", checkUser, function(req, res) {
+router.get("/:id/edit", middleware.checkUserCamp, function(req, res) {
 	var id = req.params.id;
 	Camp.findById(id, function(err, camp) {
 		if(err) {
@@ -65,7 +66,7 @@ router.get("/:id/edit", checkUser, function(req, res) {
 });
 
 // UPDATE ROUTE
-router.put("/:id", checkUser, function(req, res) {
+router.put("/:id", middleware.checkUserCamp, function(req, res) {
 	var id = req.params.id;
 	var updateCamp = req.body.update;
 	Camp.findByIdAndUpdate(id, updateCamp, function(err, camp) {
@@ -79,7 +80,7 @@ router.put("/:id", checkUser, function(req, res) {
 });
 
 // DESTROY ROUTE
-router.delete("/:id", checkUser, function(req, res) {
+router.delete("/:id", middleware.checkUserCamp, function(req, res) {
 	var id = req.params.id;
 	Camp.findByIdAndRemove(id, function(err) {
 		if(err) {
@@ -91,27 +92,4 @@ router.delete("/:id", checkUser, function(req, res) {
 	});
 });
 
-
-// Middlewares
-function isLoggedIn(req, res, next) {
-	if(req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect("/login");
-}
-
-function checkUser(req, res, next) {
-	var id = req.params.id;
-	Camp.findById(id, function(err, camp) {
-		if(err) {
-			console.log(err);
-			res.redirect("/camps");
-		} else {
-			if(req.user && req.user._id.equals(camp.author.id)) {
-				return next();
-			}
-			res.redirect("/camps/" + id);
-		}
-	});
-}
 module.exports = router;

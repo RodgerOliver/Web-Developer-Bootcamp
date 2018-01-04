@@ -9,7 +9,6 @@ var	passportMongoose	= require("passport-local-mongoose"),
 	passport			= require("passport"),
 	mongoose			= require("mongoose"),
 	express				= require("express"),
-	seedDB				= require("./seeds"),
 	app					= express();
 
 // Requering Routes
@@ -21,7 +20,6 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
-seedDB();
 
 // mongoose setup
 mongoose.Promise = global.Promise;
