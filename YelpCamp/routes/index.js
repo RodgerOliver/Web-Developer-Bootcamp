@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 var passport = require("passport");
+var middleware = require("../middlewares");
 
 // ROOT ROUTE
 router.get("/", function(req, res) {
@@ -19,10 +20,11 @@ router.post("/register", function(req, res) {
 	var password = req.body.password;
 	User.register(new User({username: username}), password, function(err, newUser) {
 		if(err) {
-			console.log(err);
+			req.flash("error", err.message);
 			return res.redirect("/register");
 		}
 		passport.authenticate("local")(req, res, function() {
+			req.flash("success", "Welcome to YelpCamp! Nice to meet you " + newUser.username);
 			res.redirect("/camps");
 		});
 	});
@@ -35,12 +37,15 @@ router.get("/login", function(req, res) {
 
 router.post("/login", passport.authenticate("local", {
 	successRedirect: "/camps",
-	failureRedirect: "/login"
+	failureRedirect: "/login",
+	successFlash: true,
+	failureFlash: true
 }));
 
 // logout
 router.get("/logout", function(req, res) {
 	req.logout();
+	req.flash("success", "You logged out!");
 	res.redirect("/camps");
 });
 

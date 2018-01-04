@@ -85,6 +85,7 @@ router.delete("/:commentId", middleware.checkUserComment, function(req, res) {
 			console.log(err);
 			res.redirect("/camps");
 		} else {
+			req.flash("success", "Successfully deleted the comment");
 			res.redirect("/camps/" + campId);
 		}
 	});

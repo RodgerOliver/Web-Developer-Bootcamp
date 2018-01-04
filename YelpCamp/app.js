@@ -5,6 +5,7 @@ var	passportMongoose	= require("passport-local-mongoose"),
 	LocalStrategy		= require("passport-local"),
 	Camp				= require("./models/camp"),
 	User				= require("./models/user"),
+	flash				= require("connect-flash"),
 	bodyParser			= require("body-parser"),
 	passport			= require("passport"),
 	mongoose			= require("mongoose"),
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
+app.use(flash());
 
 // mongoose setup
 mongoose.Promise = global.Promise;
@@ -30,7 +32,7 @@ app.use(expressSession({
 	secret: "Parkour",
 	resave: false,
 	saveUninitialized: false
-}))
+}));
 
 // passport setup
 app.use(passport.initialize());
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 // way to render this in each route
 app.use(function(req, res, next) {
 	res.locals.user = req.user; // "res.locals.USER" will be the name available in the template
+	res.locals.flashError = req.flash("error");
+	res.locals.flashSuccess = req.flash("success");
 	next();
 });
 
