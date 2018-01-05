@@ -6,7 +6,7 @@ var middleware = require("../middlewares");
 
 // ROOT ROUTE
 router.get("/", function(req, res) {
-	res.render("home");
+	res.render("landing");
 });
 
 // AUTH ROUTES
