@@ -17,7 +17,7 @@
 					<div class="row">
 						<div class="col-md-6 text-left">
 							<h5 class="card-title"><a href="#"><%= camp.name %></a></h5>
-							<h6 class="card-subtitle text-muted">Created by <%= camp.author.username %></h6>
+							<h6 class="card-subtitle text-muted">Created by <%= camp.author.username %> <%= moment(camp.createdAt).fromNow() %></h6>
 						</div>
 						<p class="card-text col-md-6 text-right font-weight-bold">$<%= camp.price %>/night</p>
 					</div>
@@ -34,7 +34,7 @@
 					<% camp.comments.forEach(function(comment) { %>
 					<div class="row">
 						<div class="col-md-12">
-							<span class="right text-muted">10 days ago</span>
+							<span class="right text-muted"><%= moment(comment.createdAt).fromNow() %></span>
 							<p class="card-text"><strong><%= comment.author.username %></strong></p>
 							<p>
 								<%= comment.text %>

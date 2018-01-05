@@ -7,6 +7,7 @@ var commentSchema = new mongoose.Schema({
 			ref: "User"
 		},
 		username: String
-	}
+	},
+	createdAt: {type: Date, default: Date.now}
 });
 module.exports = mongoose.model("Comment", commentSchema);

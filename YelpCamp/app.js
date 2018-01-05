@@ -49,6 +49,9 @@ app.use(function(req, res, next) {
 	next();
 });
 
+// Moment is available for use in all of your view files
+app.locals.moment = require("moment"); 
+
 // Using Routes
 app.use(indexRoutes);
 app.use("/camps", campsRoutes); // prefix "/camps" is added in front of every route
