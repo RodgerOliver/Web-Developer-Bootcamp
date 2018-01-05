@@ -11,6 +11,9 @@
 				<input class="form-control" type="url" name="update[image]" value="<%= camp.image %>" required>
 			</div>
 			<div class="form-group">
+				<input class="form-control" type="number" name="update[price]" value="<%= camp.price %>" min="0.01" step="0.01" required>
+			</div>
+			<div class="form-group">
 				<textarea class="form-control" name="update[description]" required><%= camp.description %></textarea>
 			</div>
 			<div class="form-group">

@@ -19,7 +19,7 @@
 							<h5 class="card-title"><a href="#"><%= camp.name %></a></h5>
 							<h6 class="card-subtitle text-muted">Created by <%= camp.author.username %></h6>
 						</div>
-						<p class="card-text col-md-6 text-right font-weight-bold">$9.00/night</p>
+						<p class="card-text col-md-6 text-right font-weight-bold">$<%= camp.price %>/night</p>
 					</div>
 					<p class="card-text my-3"><%= camp.description %></p>
 				<% if(user && user._id.equals(camp.author.id)) { %>
