@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Secret Dairy</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+
+	<div class="container text-center">
+		<% if(flashError && flashError.length > 0) { %>
+		<div class="container">
+			<div class="alert alert-danger" role="alert">
+				<%= flashError %>
+			</div>
+		</div>
+		<% } else if(flashSuccess && flashSuccess.length > 0) { %>
+		<div class="container">
+			<div class="alert alert-success" role="alert">
+				<%= flashSuccess %>
+			</div>
+		</div>
+		<% } %>
+		<form action="/send" method="POST">
+			<fieldset class="form-group">
+				<label>Subject</label>
+				<input class="form-control" type="text" name="subject" placeholder="Subject">
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Content</label>
+				<textarea class="form-control" name="content" rows="5" placeholder="Type your message here."></textarea>
+			</fieldset>
+			<fieldset class="form-group">
+				<input class="btn btn-primary" type="submit" value="Send">
+			</fieldset>
+		</form>
+	</div>
+
+</body>
+</html>
